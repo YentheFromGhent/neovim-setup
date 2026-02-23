@@ -59,12 +59,20 @@ vim.opt.encoding = "utf-8"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.keymap.set("n", "<leader>ss", ":w<CR>")
-vim.keymap.set("n", "<leader>sq", ":wq<CR>")
+vim.keymap.set("n", "<leader>ss", ":w<CR>", {desc = "Write file"})
+vim.keymap.set("n", "<leader>sq", ":wq<CR>", { desc = "Write and quit file" })
+vim.keymap.set("n", "<leader>cs", ":noh<CR>", { desc = "Clear search highlighting" })
 
-vim.keymap.set("n", "<leader>cs", ":noh<CR>")
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split window horizontally" })
 
-vim.keymap.set("n", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Lua line
 local lualine_theme = require"lualine.themes.iceberg_dark"
