@@ -1,7 +1,6 @@
 -- Custom options
 vim.opt.termguicolors  = true
 --vim.cmd.colorscheme("github_dark_default")
-vim.cmd.colorscheme("github_dark_high_contrast")
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -98,7 +97,9 @@ vim.pack.add({
 	},
 	"https://github.com/L3MON4D3/LuaSnip",
     "https://github.com/ThePrimeagen/harpoon.git",
-    "https://github.com/nvim-lua/plenary.nvim.git"
+    "https://github.com/nvim-lua/plenary.nvim.git",
+    "https://github.com/nvim-lualine/lualine.nvim.git",
+    "https://github.com/projekt0n/github-nvim-theme"
 })
 
 local function packadd(name)
@@ -114,6 +115,8 @@ packadd("blink.cmp")
 packadd("LuaSnip")
 packadd("harpoon")
 packadd("plenary.nvim")
+packadd("lualine.nvim")
+packadd("github-nvim-theme")
 
 -- Lua line
 local lualine_theme = require"lualine.themes.iceberg_dark"
@@ -301,3 +304,6 @@ vim.keymap.set("n", "<C-1>", function() harpoon_ui.nav_file(1) end)
 vim.keymap.set("n", "<C-2>", function() harpoon_ui.nav_file(2) end)
 vim.keymap.set("n", "<C-3>", function() harpoon_ui.nav_file(3) end)
 vim.keymap.set("n", "<C-4>", function() harpoon_ui.nav_file(4) end)
+
+-- Github theme
+vim.cmd.colorscheme("github_dark_high_contrast")
