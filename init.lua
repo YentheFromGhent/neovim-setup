@@ -26,6 +26,7 @@ vim.opt.showmatch = true
 vim.opt.cmdheight = 1
 vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.opt.showmode = false
+vim.opt.nrformats:remove("octal");
 
 -- Create undo director so that undo actions persist
 local undodir = vim.fn.expand("~/.vim/undodir")
@@ -49,7 +50,6 @@ vim.opt.autowrite = false
 vim.opt.hidden = true
 vim.opt.errorbells = false
 vim.opt.selection = "inclusive"
-vim.opt.mouse = "a"
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.modifiable = true
 vim.opt.encoding = "utf-8"
@@ -99,7 +99,7 @@ vim.pack.add({
     "https://github.com/ThePrimeagen/harpoon.git",
     "https://github.com/nvim-lua/plenary.nvim.git",
     "https://github.com/nvim-lualine/lualine.nvim.git",
-    "https://github.com/projekt0n/github-nvim-theme"
+    "https://github.com/projekt0n/github-nvim-theme",
 })
 
 local function packadd(name)
@@ -135,6 +135,14 @@ end, { desc = "FZF Files" })
 vim.keymap.set("n", "<leader>fg", function()
 	require("fzf-lua").live_grep()
 end, { desc = "FZF Live Grep" })
+vim.keymap.set("n", "<leader>fr", function()
+    require("fzf-lua").files({
+        cwd = "/",
+    })
+end , { desc = "Search from root directory" })
+vim.keymap.set("n", "<leader>fi", function()
+    require("fzf-lua").git_files()
+end , { desc = "Search git-files" })
 vim.keymap.set("n", "<leader>fb", function()
 	require("fzf-lua").buffers()
 end, { desc = "FZF Buffers" })
@@ -147,10 +155,14 @@ end, { desc = "FZF Diagnostics Document" })
 vim.keymap.set("n", "<leader>fX", function()
 	require("fzf-lua").diagnostics_workspace()
 end, { desc = "FZF Diagnostics Workspace" })
+vim.keymap.set("n", "<leader>jd", function()
+    require("fzf-lua").lsp_definitions()
+end, { desc = "Jump to definition" })
 
 -- Mini.nvim
 require("mini.icons").setup({})
 require("mini.pairs").setup({})
+require("mini.comment").setup({})
 
 -- Treesitter
 local setup_treesitter = function()
@@ -169,6 +181,7 @@ local setup_treesitter = function()
         "markdown",
         "python",
         "bash",
+        "zig"
     }
 
     local config = require("nvim-treesitter.config")
@@ -258,7 +271,9 @@ vim.lsp.enable({
     "lua_ls",
     "bashls",
     "ts_ls",
-    "clangd"
+    "clangd",
+    "tinymist",
+    "zls",
 })
 
 -- Blink 
@@ -297,13 +312,14 @@ vim.lsp.config["*"] = {
 local harpoon_mark = require("harpoon.mark")
 local harpoon_ui = require("harpoon.ui")
 
-vim.keymap.set("n", "<C-a>", function() harpoon_mark.add_file() end)
-vim.keymap.set("n", "<C-l>", function() harpoon_ui.toggle_quick_menu() end)
+vim.keymap.set("n", "<A-a>", function() harpoon_mark.add_file() end)
+vim.keymap.set("n", "<A-l>", function() harpoon_ui.toggle_quick_menu() end)
 
-vim.keymap.set("n", "<C-1>", function() harpoon_ui.nav_file(1) end)
-vim.keymap.set("n", "<C-2>", function() harpoon_ui.nav_file(2) end)
-vim.keymap.set("n", "<C-3>", function() harpoon_ui.nav_file(3) end)
-vim.keymap.set("n", "<C-4>", function() harpoon_ui.nav_file(4) end)
+vim.keymap.set("n", "<A-1>", function() harpoon_ui.nav_file(1) end)
+vim.keymap.set("n", "<A-2>", function() harpoon_ui.nav_file(2) end)
+vim.keymap.set("n", "<A-3>", function() harpoon_ui.nav_file(3) end)
+vim.keymap.set("n", "<A-4>", function() harpoon_ui.nav_file(4) end)
 
 -- Github theme
 vim.cmd.colorscheme("github_dark_high_contrast")
+

@@ -9,6 +9,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "flutter-tools.nvim": {
+      "rev": "677cc07c16e8b89999108d2ebeefcfc5f539b73c",
+      "src": "https://github.com/nvim-flutter/flutter-tools.nvim.git"
+    },
     "fzf-lua": {
       "rev": "72ec224172eea757eab6b349775ad5bada7521d7",
       "src": "https://github.com/ibhagwan/fzf-lua.git"
